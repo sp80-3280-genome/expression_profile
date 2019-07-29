@@ -25,13 +25,18 @@ while(<>) {
         $sequence .= "$_";
     }elsif((/>/) && ($aux)) {
        $length = length($sequence);
-	$total_length += $length;
-	push @aseqsize, $length;
-        $sequence = "";
-        $length = 0;
+       $total_length += $length;
+       push @aseqsize, $length;
+       #print "$name ($aux) $sequence\n";
+       $sequence = "";
+       $length = 0;
     }
     $aux = $name;
 }
+$length = length($sequence);
+$total_length += $length;
+push @aseqsize, $length;
+#print "$name ($aux) $sequence\n";
 
 my $average  = Math::NumberCruncher::Median(\@aseqsize);
 my $identity = Math::NumberCruncher::Mean(\@aseqsize);
